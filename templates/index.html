@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>폐암 예측</title>
+    <style>
+        body { font-family: sans-serif; background: #f7f7f7; }
+        .container { max-width: 500px; margin: 40px auto; background: #fff; padding: 2em; border-radius: 10px; box-shadow: 0 2px 8px #ccc; }
+        h1 { text-align: center; }
+        form { display: flex; flex-direction: column; gap: 1em; }
+        label { font-weight: bold; }
+        input[type="number"], select { width: 100%; padding: 0.5em; border-radius: 5px; border: 1px solid #ccc; }
+        .gender-group { display: flex; gap: 1em; }
+        .result { margin-top: 2em; padding: 1em; border-radius: 8px; background: #e0f7fa; text-align: center; font-size: 1.2em; }
+        button { padding: 0.7em; border: none; border-radius: 5px; background: #1976d2; color: #fff; font-size: 1em; cursor: pointer; }
+        button:hover { background: #1565c0; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>폐암 예측</h1>
+    <form method="post">
+        <label for="AGE">나이</label>
+        <input type="number" id="AGE" name="AGE" min="1" max="120" required>
+
+        <label for="SMOKING">흡연 여부</label>
+        <select id="SMOKING" name="SMOKING">
+            <option value="1">예</option>
+            <option value="0">아니오</option>
+        </select>
+
+        <label for="YELLOW_FINGERS">손가락이 노란가요?</label>
+        <select id="YELLOW_FINGERS" name="YELLOW_FINGERS">
+            <option value="1">예</option>
+            <option value="0">아니오</option>
+        </select>
+
+        <label for="ANXIETY">불안감이 있나요?</label>
+        <select id="ANXIETY" name="ANXIETY">
+            <option value="1">예</option>
+            <option value="0">아니오</option>
+        </select>
+
+        <label for="PEER_PRESSURE">주변의 압력이 있나요?</label>
+        <select id="PEER_PRESSURE" name="PEER_PRESSURE">
+            <option value="1">예</option>
+            <option value="0">아니오</option>
+        </select>
+
+        <label for="CHRONIC DISEASE">만성 질환이 있나요?</label>
+        <select id="CHRONIC DISEASE" name="CHRONIC DISEASE">
+            <option value="1">예</option>
+            <option value="0">아니오</option>
+        </select>
+
+        <label for="FATIGUE">피로감을 자주 느끼나요?</label>
+        <select id="FATIGUE" name="FATIGUE">
+            <option value="1">예</option>
+            <option value="0">아니오</option>
+        </select>
+
+        <label for="ALLERGY">알레르기가 있나요?</label>
+        <select id="ALLERGY" name="ALLERGY">
+            <option value="1">예</option>
+            <option value="0">아니오</option>
+        </select>
+
+        <label for="WHEEZING">쌕쌕거림이 있나요?</label>
+        <select id="WHEEZING" name="WHEEZING">
+            <option value="1">예</option>
+            <option value="0">아니오</option>
+        </select>
+
+        <label for="ALCOHOL CONSUMING">음주를 하나요?</label>
+        <select id="ALCOHOL CONSUMING" name="ALCOHOL CONSUMING">
+            <option value="1">예</option>
+            <option value="0">아니오</option>
+        </select>
+
+        <label for="COUGHING">기침이 있나요?</label>
+        <select id="COUGHING" name="COUGHING">
+            <option value="1">예</option>
+            <option value="0">아니오</option>
+        </select>
+
+        <label for="SHORTNESS OF BREATH">호흡 곤란이 있나요?</label>
+        <select id="SHORTNESS OF BREATH" name="SHORTNESS OF BREATH">
+            <option value="1">예</option>
+            <option value="0">아니오</option>
+        </select>
+
+        <label for="SWALLOWING DIFFICULTY">삼킴 곤란이 있나요?</label>
+        <select id="SWALLOWING DIFFICULTY" name="SWALLOWING DIFFICULTY">
+            <option value="1">예</option>
+            <option value="0">아니오</option>
+        </select>
+
+        <label for="CHEST PAIN">가슴 통증이 있나요?</label>
+        <select id="CHEST PAIN" name="CHEST PAIN">
+            <option value="1">예</option>
+            <option value="0">아니오</option>
+        </select>
+
+        <label>성별</label>
+        <div class="gender-group">
+            <label><input type="radio" name="GENDER" value="F" required> 여성</label>
+            <label><input type="radio" name="GENDER" value="M"> 남성</label>
+        </div>
+        <input type="hidden" name="GENDER_F" id="gender_f" value="0">
+        <input type="hidden" name="GENDER_M" id="gender_m" value="0">
+
+        <button type="submit">예측하기</button>
+    </form>
+
+    {% if prediction %}
+        <div class="result">
+            <strong>결과: {{ prediction.result }}</strong><br>
+            {% if prediction.prob is not none %}
+                (폐암일 확률: {{ (prediction.prob * 100) | round(1) }}%)
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+<script>
+// 성별 라디오 버튼 동기화
+const genderRadios = document.querySelectorAll('input[type=radio][name="GENDER"]');
+genderRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+        if (this.value === 'F') {
+            document.getElementById('gender_f').value = 1;
+            document.getElementById('gender_m').value = 0;
+        } else if (this.value === 'M') {
+            document.getElementById('gender_f').value = 0;
+            document.getElementById('gender_m').value = 1;
+        }
+    });
+});
+</script>
+</body>
+</html> 
