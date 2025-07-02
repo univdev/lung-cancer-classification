@@ -48,7 +48,7 @@ def index():
         else:
             cancer_prob = None
         prediction = {
-            'result': '폐암 의심' if pred else '폐암 아님',
+            'result': 'Lung cancer suspected' if pred else 'No lung cancer',
             'prob': cancer_prob
         }
     return render_template('index.html', features=FEATURES, prediction=prediction)

@@ -20,103 +20,103 @@
 <div class="container">
     <h1>폐암 예측</h1>
     <form method="post">
-        <label for="AGE">나이</label>
+        <label for="AGE">Age</label>
         <input type="number" id="AGE" name="AGE" min="1" max="120" required>
 
-        <label for="SMOKING">흡연 여부</label>
+        <label for="SMOKING">Smoking</label>
         <select id="SMOKING" name="SMOKING">
-            <option value="1">예</option>
-            <option value="0">아니오</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
         </select>
 
-        <label for="YELLOW_FINGERS">손가락이 노란가요?</label>
+        <label for="YELLOW_FINGERS">Yellow fingers</label>
         <select id="YELLOW_FINGERS" name="YELLOW_FINGERS">
-            <option value="1">예</option>
-            <option value="0">아니오</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
         </select>
 
-        <label for="ANXIETY">불안감이 있나요?</label>
+        <label for="ANXIETY">Anxiety</label>
         <select id="ANXIETY" name="ANXIETY">
-            <option value="1">예</option>
-            <option value="0">아니오</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
         </select>
 
-        <label for="PEER_PRESSURE">주변의 압력이 있나요?</label>
+        <label for="PEER_PRESSURE">Peer pressure</label>
         <select id="PEER_PRESSURE" name="PEER_PRESSURE">
-            <option value="1">예</option>
-            <option value="0">아니오</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
         </select>
 
-        <label for="CHRONIC DISEASE">만성 질환이 있나요?</label>
+        <label for="CHRONIC DISEASE">Chronic disease</label>
         <select id="CHRONIC DISEASE" name="CHRONIC DISEASE">
-            <option value="1">예</option>
-            <option value="0">아니오</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
         </select>
 
-        <label for="FATIGUE">피로감을 자주 느끼나요?</label>
+        <label for="FATIGUE">Fatigue</label>
         <select id="FATIGUE" name="FATIGUE">
-            <option value="1">예</option>
-            <option value="0">아니오</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
         </select>
 
-        <label for="ALLERGY">알레르기가 있나요?</label>
+        <label for="ALLERGY">Allergy</label>
         <select id="ALLERGY" name="ALLERGY">
-            <option value="1">예</option>
-            <option value="0">아니오</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
         </select>
 
-        <label for="WHEEZING">쌕쌕거림이 있나요?</label>
+        <label for="WHEEZING">Wheezing</label>
         <select id="WHEEZING" name="WHEEZING">
-            <option value="1">예</option>
-            <option value="0">아니오</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
         </select>
 
-        <label for="ALCOHOL CONSUMING">음주를 하나요?</label>
+        <label for="ALCOHOL CONSUMING">Alcohol consuming</label>
         <select id="ALCOHOL CONSUMING" name="ALCOHOL CONSUMING">
-            <option value="1">예</option>
-            <option value="0">아니오</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
         </select>
 
-        <label for="COUGHING">기침이 있나요?</label>
+        <label for="COUGHING">Coughing</label>
         <select id="COUGHING" name="COUGHING">
-            <option value="1">예</option>
-            <option value="0">아니오</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
         </select>
 
-        <label for="SHORTNESS OF BREATH">호흡 곤란이 있나요?</label>
+        <label for="SHORTNESS OF BREATH">Shortness of breath</label>
         <select id="SHORTNESS OF BREATH" name="SHORTNESS OF BREATH">
-            <option value="1">예</option>
-            <option value="0">아니오</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
         </select>
 
-        <label for="SWALLOWING DIFFICULTY">삼킴 곤란이 있나요?</label>
+        <label for="SWALLOWING DIFFICULTY">Swallowing difficulty</label>
         <select id="SWALLOWING DIFFICULTY" name="SWALLOWING DIFFICULTY">
-            <option value="1">예</option>
-            <option value="0">아니오</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
         </select>
 
-        <label for="CHEST PAIN">가슴 통증이 있나요?</label>
+        <label for="CHEST PAIN">Chest pain</label>
         <select id="CHEST PAIN" name="CHEST PAIN">
-            <option value="1">예</option>
-            <option value="0">아니오</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
         </select>
 
-        <label>성별</label>
+        <label>Gender</label>
         <div class="gender-group">
-            <label><input type="radio" name="GENDER" value="F" required> 여성</label>
-            <label><input type="radio" name="GENDER" value="M"> 남성</label>
+            <label><input type="radio" name="GENDER" value="F" required> Female</label>
+            <label><input type="radio" name="GENDER" value="M"> Male</label>
         </div>
         <input type="hidden" name="GENDER_F" id="gender_f" value="0">
         <input type="hidden" name="GENDER_M" id="gender_m" value="0">
 
-        <button type="submit">예측하기</button>
+        <button type="submit">Predict</button>
     </form>
 
     {% if prediction %}
         <div class="result">
-            <strong>결과: {{ prediction.result }}</strong><br>
+            <strong>Result: {{ prediction.result }}</strong><br>
             {% if prediction.prob is not none %}
-                (폐암일 확률: {{ (prediction.prob * 100) | round(1) }}%)
+                (Probability of lung cancer: {{ (prediction.prob * 100) | round(1) }}%)
             {% endif %}
         </div>
     {% endif %}
